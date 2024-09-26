@@ -7,6 +7,7 @@ import ovh.jakubk.keno.model.dto.KenoDrawResponseDTO;
 public interface KenoDrawService {
 
     KenoDrawResponseDTO newDraw();
+    void newDraws(String quantity);
 
     KenoDraw save(KenoDraw kenoDraw);
 

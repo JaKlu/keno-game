@@ -25,6 +25,7 @@ public class KenoDrawServiceImpl implements KenoDrawService {
         return this.kenoDrawDAO.save(kenoDraw);
     }
 
+    @Override
     public KenoDrawResponseDTO newDraw() {
         KenoDraw kenoDraw = new KenoDraw();
         DrawResult drawResult = new DrawResult();
@@ -44,7 +45,19 @@ public class KenoDrawServiceImpl implements KenoDrawService {
 
         KenoDraw savedKenoDraw = this.kenoDrawDAO.save(kenoDraw);
         return KenoDrawMapper.mapKenoDrawToKenoDrawResponseDTO(savedKenoDraw);
+    }
 
+    @Override
+    public void newDraws(String quantity) {
+        int q;
+        try {
+            q = Integer.parseInt(quantity);
+        } catch (NumberFormatException e) {
+            return;
+        }
+        for (int i = 0; i < q; i++) {
+            newDraw();
+        }
     }
 
 
@@ -61,6 +74,4 @@ public class KenoDrawServiceImpl implements KenoDrawService {
                 .map(KenoDrawMapper::mapKenoDrawToKenoDrawResponseDTO)
                 .orElseThrow();
     }
-
-
 }
